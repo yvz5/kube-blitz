@@ -1,0 +1,32 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: locusttests.kube.blitz
+spec:
+  group: kube.blitz
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                script:      # Load testing Python script
+                  type: string
+                targetUrl:   # URL of the test system
+                  type: string
+                users:       # Number of users
+                  type: integer
+                duration:    # Duration of the test (in seconds)
+                  type: integer
+  names:
+    kind: LocustTest
+    plural: locusttests
+    singular: locusttest
+    shortNames:
+      - lt
